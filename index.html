@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blooket JS Injector</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    textarea { width: 100%; height: 120px; }
+    iframe { width: 100%; height: 600px; margin-top: 20px; border: 1px solid #aaa; }
+  </style>
+</head>
+<body>
+  <h2>Blooket JavaScript Injector</h2>
+  <p>Paste JavaScript below and click inject:</p>
+  <textarea id="code">// Example: alert("Hello from Blooket injector!")</textarea><br>
+  <button onclick="injectCode()">Inject Code</button>
+
+  <iframe id="blooketFrame"
+          src="https://symmetrical-waffle-7vwq7ppq5v4w2rvjg-43553.app.github.dev/"
+          allowfullscreen></iframe>
+
+  <script>
+    function injectCode() {
+      const iframe = document.getElementById('blooketFrame');
+      const code = document.getElementById('code').value;
+
+      try {
+        const script = iframe.contentWindow.document.createElement("script");
+        script.textContent = code;
+        iframe.contentWindow.document.body.appendChild(script);
+        alert("Code injected!");
+      } catch (err) {
+        alert("Injection failed. Make sure Blooket fully loads.");
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
